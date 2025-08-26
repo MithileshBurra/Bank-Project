@@ -20,3 +20,7 @@ TRANSFORMED_DIR_NAME = "Transformed"
 TRANSFORMED_TRAIN_FILE_NAME = "Transformed_train.csv"
 TRANSFORMED_TEST_FILE_NAME = "Transformed_test.csv"
 
+
+MODEL_TRAINER_DIR_NAME = "Model"
+MODEL_TRAINER_FILE_NAME = "ModelTrainer.pkl"
+
