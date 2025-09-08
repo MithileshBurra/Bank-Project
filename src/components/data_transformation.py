@@ -63,6 +63,9 @@ class DataTransformation:
             X_test_transformed = preprocessor.named_steps["Transformer"].transform(X_test_data)
 
             feature_names = preprocessor.named_steps["Transformer"].get_feature_names_out()
+            
+            print("Before SMOTE:", X_train_data.shape, y_train_data.value_counts())
+            print("After SMOTE:", X_train_transformed.shape, pd.Series(y_train_transformed).value_counts())
 
             X_train_df = pd.DataFrame(X_train_transformed, columns = feature_names)
             X_test_df = pd.DataFrame(X_test_transformed, columns = feature_names)

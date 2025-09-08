@@ -23,40 +23,44 @@ class ModelTrainer:
     def train_model(self,X_train,y_train,X_test,y_test):
         try:
             models = {
-                "Logistic Regression": LogisticRegression(),
-                "Decision Tree": DecisionTreeClassifier(),
-                "Random Forest": RandomForestClassifier(),
+                ##"Logistic Regression": LogisticRegression(class_weight='balanced', max_iter=1000),
+                ##"Decision Tree": DecisionTreeClassifier(class_weight='balanced', random_state=42),
+                ##"Random Forest": RandomForestClassifier(class_weight='balanced', random_state=42),
                 "Gradient Boosting": GradientBoostingClassifier(),
-                "AdaBoost": AdaBoostClassifier(),
-                "KNN": KNeighborsClassifier(),
-                "Navie Bayes": GaussianNB()
+                ##"AdaBoost": AdaBoostClassifier(),
+                ##"KNN": KNeighborsClassifier(),
+                ##"Navie Bayes": GaussianNB()
             }
 
             params={
-                "Logistic Regression":{},
-                "Decision Tree": {
-                    'criterion':['gini', 'entropy', 'log_loss'],
-                    'max_features':['sqrt','log2'],
-                },
-                "Random Forest":{
-                    'criterion':['gini', 'entropy', 'log_loss'],
-                    'n_estimators': [8,16,32,128,256]
-                },
+                ##"Logistic Regression":{'C': [0.01, 0.1, 1, 10]},
+                ##"Decision Tree": {
+                    ##'criterion':['gini', 'entropy', 'log_loss'],
+                    ##'max_features':['sqrt','log2'],
+                   ## 'max_depth': [5, 10, 15], 
+                    ##'min_samples_split': [2, 5, 10]
+               # },
+                ##"Random Forest":{
+                   # 'criterion':['gini', 'entropy', 'log_loss'],
+                   # 'n_estimators': [8,16,32,128,256],
+                    #'max_depth': [ 10, 20,30,40], 
+                   # 'min_samples_split': [2, 5]
+              #  },
                 "Gradient Boosting":{
                     'learning_rate':[.1,.01,.05,.001],
                     'subsample':[0.6,0.7,0.75,0.85,0.9],
                     'n_estimators': [8,16,32,64,128,256]
                 },
                 
-                "AdaBoost":{
-                    'learning_rate':[.1,.01,.001],
-                    'n_estimators': [8,16,32,64,128,256]
-                },
-                "KNN":{
-                    'n_neighbors' : [3,5,7,9,11],
-                    'weights':['uniform', 'distance']
-                },
-                "Navie Bayes" :{}
+               # "AdaBoost":{
+                #    'learning_rate':[.1,.01,.001],
+                #    'n_estimators': [8,16,32,64,128,256]
+                #},
+                #"KNN":{
+                 #   'n_neighbors' : [3,5,7,9,11],
+                 #   'weights':['uniform', 'distance']
+               # },
+                #"Navie Bayes" :{}
                 
             }
 
@@ -76,6 +80,7 @@ class ModelTrainer:
                 best_score=best_score,
                 best_params = best_params,
                 model_trainer_file_path=self.model_trainer_config.model_trainer_file_path,
+                
             )
              
 
@@ -98,6 +103,8 @@ class ModelTrainer:
             for model_name, metrics in artifact.model_report.items():
                 print(f"Model Name = {model_name}")
                 print(metrics)
+
+            return artifact
 
         except Exception as e:
             raise CustomException(e,sys)
